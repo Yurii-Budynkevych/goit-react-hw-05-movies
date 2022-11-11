@@ -16,3 +16,19 @@ export const getMovie = query => {
     )
     .then(res => res.data.results);
 };
+
+export const getMovieById = id => {
+  return axios.get(`/movie/${id}?api_key=${API_KEY}`).then(res => res.data);
+};
+
+export const getCastById = id => {
+  return axios
+    .get(`/movie/${id}/credits?api_key=${API_KEY}`)
+    .then(res => res.data);
+};
+
+export const getRevievById = id => {
+  return axios
+    .get(`/movie/${id}/reviews?api_key=${API_KEY}`)
+    .then(res => res.data);
+};
