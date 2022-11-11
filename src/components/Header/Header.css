@@ -1,0 +1,18 @@
+.nav-bar {
+    border-bottom: 2px solid navy;
+}
+.nav-list {
+    list-style: none;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.nav-link {
+    color: blue;
+    font-size: larger;
+    text-decoration: none;
+}
+.nav-link.active {
+    color: navy;
+    font-weight: bold;
+}
