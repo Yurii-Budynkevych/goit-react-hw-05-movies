@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import Home from 'pages/Home/Home';
 import Movies from 'pages/Movies/Movies';
 import Header from './Header/Header';
@@ -17,6 +17,7 @@ export const App = () => {
           <Route path="cast" element={<Cast />} />
           <Route path="reviews" element={<Reviews />} />
         </Route>
+        <Route path="*" element={<Navigate to={'/'} />} />
       </Routes>
     </>
   );
