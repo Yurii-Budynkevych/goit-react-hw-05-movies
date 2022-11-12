@@ -7,6 +7,7 @@ import './Movies.css';
 const Movies = () => {
   const [search, setSearch] = useState('');
   const [query, setQuery] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const onSubmit = e => {
     e.preventDefault();
@@ -22,15 +23,17 @@ const Movies = () => {
     if (!search) {
       return;
     }
+    setLoading(true);
     getMovie(search)
       .then(res => setQuery(res))
-      .catch(err => console.log(err.message));
+      .catch(err => console.log(err.message))
+      .finally(() => setLoading(false));
   }, [search]);
 
   return (
     <>
       <SearchForm onSubmit={onSubmit} />
-      <List arr={query} />
+      {loading ? <h2>Loading...</h2> : <List arr={query} />}
     </>
   );
 };

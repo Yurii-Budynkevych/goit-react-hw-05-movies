@@ -6,10 +6,20 @@ import './Revievs.css';
 const Reviews = () => {
   const [reviev, setReviev] = useState([]);
   const { id } = useParams();
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    getRevievById(id).then(res => setReviev(res.results));
-  }, [id]);
+    if (!id) {
+      return;
+    }
+    setLoading(true);
+    getRevievById(id)
+      .then(res => setReviev(res.results))
+      .finally(() => setLoading(false));
+  }, [id, reviev.length]);
+  if (loading) {
+    return <h2>Loading...</h2>;
+  }
   if (reviev.length === 0) {
     return <h3>We don't have revievs for this movie</h3>;
   }
