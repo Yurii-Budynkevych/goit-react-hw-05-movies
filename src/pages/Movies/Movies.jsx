@@ -1,13 +1,16 @@
 import { useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { getMovie } from 'utils/filmsApi';
 import SearchForm from 'components/SearchForm/SearchForm';
 import List from 'components/List/List';
 import './Movies.css';
 
 const Movies = () => {
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useSearchParams();
   const [query, setQuery] = useState([]);
   const [loading, setLoading] = useState(false);
+
+  const sQery = search.get('film');
 
   const onSubmit = e => {
     e.preventDefault();
@@ -15,20 +18,20 @@ const Movies = () => {
     if (searchValue.trim() === '') {
       return window.alert('Please enter something');
     }
-    setSearch(searchValue);
+    setSearch({ film: searchValue });
     e.currentTarget.reset();
   };
 
   useEffect(() => {
-    if (!search) {
+    if (!sQery) {
       return;
     }
     setLoading(true);
-    getMovie(search)
+    getMovie(sQery)
       .then(res => setQuery(res))
       .catch(err => console.log(err.message))
       .finally(() => setLoading(false));
-  }, [search]);
+  }, [sQery]);
 
   return (
     <>

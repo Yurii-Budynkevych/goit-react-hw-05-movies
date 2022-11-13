@@ -1,11 +1,19 @@
 import { useState, useEffect } from 'react';
-import { NavLink, Outlet, useParams } from 'react-router-dom';
+import {
+  NavLink,
+  Link,
+  Outlet,
+  useParams,
+  useLocation,
+} from 'react-router-dom';
 import { getMovieById } from 'utils/filmsApi';
 import './FilmDescr.css';
 
 export const FilmDescr = () => {
   const [film, setFilm] = useState(null);
   const { id } = useParams();
+
+  const location = useLocation();
 
   useEffect(() => {
     getMovieById(id).then(res => setFilm(res));
@@ -15,6 +23,7 @@ export const FilmDescr = () => {
 
   return (
     <div>
+      <Link to={location.state}>Go back</Link>
       <h2>{film.title}</h2>
       <img
         src={`https://image.tmdb.org/t/p/w300${film.poster_path}`}
@@ -32,12 +41,12 @@ export const FilmDescr = () => {
       <div className="additional-info">
         <ul className="nav-list">
           <li>
-            <NavLink className="nav-link" to={'cast'}>
+            <NavLink className="nav-link" to={'cast'} state={location.state}>
               Cast
             </NavLink>
           </li>
           <li>
-            <NavLink className="nav-link" to={'reviews'} state={film}>
+            <NavLink className="nav-link" to={'reviews'} state={location.state}>
               Reviews
             </NavLink>
           </li>
