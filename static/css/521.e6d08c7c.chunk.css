@@ -1,0 +1,2 @@
+.gallery{grid-gap:16px;display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));list-style:none;margin:0 auto;max-width:calc(100vw - 48px);padding:0}
+/*# sourceMappingURL=521.e6d08c7c.chunk.css.map*/
