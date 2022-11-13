@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react';
 import {
   NavLink,
   Link,
@@ -6,6 +5,7 @@ import {
   useParams,
   useLocation,
 } from 'react-router-dom';
+import { Suspense, useState, useEffect } from 'react';
 import { getMovieById } from 'utils/filmsApi';
 import './FilmDescr.css';
 
@@ -52,7 +52,9 @@ export const FilmDescr = () => {
           </li>
         </ul>
       </div>
-      <Outlet />
+      <Suspense fallback={<h2>Loading...</h2>}>
+        <Outlet />
+      </Suspense>
     </div>
   );
 };
